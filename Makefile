@@ -2,11 +2,11 @@
 # Date created:				05 October 2008
 # Whom:					Marin Atanasov <dnaeon@gmail.com>
 #
-# $FreeBSD$
+# $FreeBSD: ports/ports-mgmt/pkg_add_it/Makefile,v 1.3 2009/05/24 20:21:22 dhn Exp $
 #
 
 PORTNAME=	pkg_add_it
-PORTVERSION=	1.1
+PORTVERSION=	1.2
 CATEGORIES=	ports-mgmt
 MASTER_SITES=	http://www.unix-heaven.org/ports-mgmt/
 
