@@ -18,6 +18,13 @@ MAN5=		pkg_add_it.conf.5
 PLIST_FILES=	sbin/pkg_add_it \
 		etc/pkg_add_it.conf
 
+PKG_RELEASE!=	/usr/bin/uname -r | /usr/bin/cut -d '-' -f 1,2 | \
+			/usr/bin/sed -e 's|\.[0-9]*-STABLE|-STABLE|'
+
+post-patch:
+	${REINPLACE_CMD} -e 's|@PKG_ARCH@|${ARCH}|' \
+		         -e 's|@PKG_RELEASE@|${PKG_RELEASE:L}|' ${WRKSRC}/pkg_add_it.conf
+
 do-install:
 	${CP} ${WRKSRC}/pkg_add_it.conf ${PREFIX}/etc/pkg_add_it.conf
 	${INSTALL_PROGRAM} ${WRKSRC}/pkg_add_it ${PREFIX}/sbin/pkg_add_it
@@ -25,10 +32,6 @@ do-install:
 	${INSTALL_MAN} ${WRKSRC}/pkg_add_it.conf.5 ${MAN5PREFIX}/man/man5
 
 post-install:
-	${ECHO_CMD} -n "s/@PKG_RELEASE@/" > ${WRKDIR}/pkg_add_it.sed
-	${ECHO_CMD} "`${UNAME} -r | ${CUT} -d '-' -f 1,2 | ${TR} "[:upper:]" "[:lower:]"`/g" >> ${WRKDIR}/pkg_add_it.sed
-	${SED} -ie "s/@PKG_ARCH@/${ARCH}/g" ${PREFIX}/etc/pkg_add_it.conf
-	${SED} -ie -f ${WRKDIR}/pkg_add_it.sed ${PREFIX}/etc/pkg_add_it.conf
 	@${ECHO_CMD}
 	@${CAT} ${PKGMESSAGE}
 	@${ECHO_CMD}
