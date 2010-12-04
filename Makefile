@@ -1,12 +1,12 @@
 # New ports collection makefile for:	pkg_add_it
-# Date created:				29 November 2010
-# Whom:					Marin Atanasov Nikolov <dnaeon@gmail.com>
+# Date created:				05 October 2008
+# Whom:					Marin Atanasov <dnaeon@gmail.com>
 #
-# $FreeBSD$
+# $FreeBSD: ports/ports-mgmt/pkg_add_it/Makefile,v 1.5 2010/11/30 13:43:33 pav Exp $
 #
 
 PORTNAME=	pkg_add_it
-PORTVERSION=	1.3.1
+PORTVERSION=	1.3.2
 CATEGORIES=	ports-mgmt
 MASTER_SITES=	http://www.unix-heaven.org/ports-mgmt/
 
@@ -19,7 +19,7 @@ PLIST_FILES=	etc/pkg_add_it.conf sbin/pkg_add_it
 
 .include <bsd.port.pre.mk>
 
-PKG_RELEASE!=	${UNAME} -r | ${CUT} -d '-' -f 1,2 | ${SED} -e 's|\.[0-9]*-STABLE|-STABLE|'
+PKG_RELEASE!=	${UNAME} -r | ${CUT} -d '-' -f 1,2 | ${SED} -e 's|\.[0-9]*.*|-STABLE|'
 
 post-patch:
 	${REINPLACE_CMD} -e 's|@PKG_ARCH@|${ARCH}|' \
